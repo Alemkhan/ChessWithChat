@@ -9,9 +9,14 @@ import java.io.IOException;
 public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         HttpSession session = request.getSession();
         session.setAttribute("username",request.getParameter("username"));
-        response.sendRedirect("chat.jsp");
+        if (request.getParameter("selection").equals("Chat")){
+            response.sendRedirect("chat.jsp");
+        } else {
+            response.sendRedirect("chess/index.html");
+        }
 
     }
 }

@@ -103,6 +103,21 @@
 
     </style>
 
+
+</head>
+<body>
+<div class="main">
+
+    <div class="chat">
+        <div class="messageContainer">
+        </div>
+
+
+        <div class="form">
+            <input type="text" name="message" id="messageinput">
+            <button class="sender">Send</button>
+        </div>
+    </div>
     <script>
         $(document).ready(function() {
             $('.sender').click(function(){
@@ -119,16 +134,16 @@
 
                         function(responseText){
 
-                        $('.messageContainer').append("" +
-                            "<div class='user2'>" +
-                            "   <div class='pill2'>" +
-                            "       <h3>You</h3>" +
-                            "       <p class='user2Message'>" +
-                                        responseText + "" +
-                            "       </p>" +
-                            "   </div>" +
-                            "   </div>")
-                    })
+                            $('.messageContainer').append("" +
+                                "<div class='user2'>" +
+                                "   <div class='pill2'>" +
+                                "       <h3>You</h3>" +
+                                "       <p class='user2Message'>" +
+                                responseText + "" +
+                                "       </p>" +
+                                "   </div>" +
+                                "   </div>")
+                        })
 
                 };
             });
@@ -149,20 +164,5 @@
         })
 
     </script>
-</head>
-<body>
-<div class="main">
-
-    <div class="chat">
-        <div class="messageContainer">
-        </div>
-
-
-        <div class="form">
-            <input type="text" name="message" id="messageinput">
-            <button class="sender">Send</button>
-        </div>
-    </div>
-
 </div>
 </body>

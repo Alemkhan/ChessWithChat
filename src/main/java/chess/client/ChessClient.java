@@ -1,9 +1,12 @@
-package chat.client;
+package chess.client;
+
+import chat.client.ChatClient;
 
 import java.io.*;
 import java.net.Socket;
 
-public class ChatClient {
+public class ChessClient {
+
     public static volatile String servletMessage;
     public static volatile String serverMessage;
     private static final int PORT = 4000;
@@ -12,13 +15,13 @@ public class ChatClient {
     private BufferedWriter writer;
 
 
-    public ChatClient() {
+    public ChessClient() {
         try {
             clientSocket = new Socket("localhost", PORT);
             reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             writer = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
-            new InputHandler().start();
-            new OutputHandler().start();
+            new ChessClient.InputHandler().start();
+            new ChessClient.OutputHandler().start();
         } catch (IOException e) {
             System.out.println("The server is unreachable on port " + PORT);
             e.printStackTrace();
@@ -39,7 +42,7 @@ public class ChatClient {
 
 
 
-    class InputHandler extends Thread{
+    private class InputHandler extends Thread{
         @Override
         public void run(){
             while(true) {
@@ -47,13 +50,13 @@ public class ChatClient {
                     serverMessage = reader.readLine();
                 } catch (IOException e) {
                     System.out.println("Input Handler has been interrupted");
-                    ChatClient.this.close();
+                    ChessClient.this.close();
                 }
             }
         }
     }
 
-    class OutputHandler extends Thread{
+    private class OutputHandler extends Thread{
         @Override
         public void run(){
             while(true){
@@ -65,15 +68,14 @@ public class ChatClient {
                         servletMessage = null;
                     }
 
-                    } catch (IOException e) {
-                        System.out.println("Output Handler has been interrupted");
-                        ChatClient.this.close();
-                    }
+                } catch (IOException e) {
+                    System.out.println("Output Handler has been interrupted");
+                    ChessClient.this.close();
+                }
 
             }
 
         }
     }
-
 
 }

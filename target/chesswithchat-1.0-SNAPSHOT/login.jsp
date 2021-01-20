@@ -14,7 +14,11 @@
 
         <form method="post" action="LoginServlet">
             <input type="text" name="username" required>
-            <input type="submit" name="submit">
+            <select name="selection" id="">
+                <option value="Chat">Chat</option>
+                <option value="Chess">Chess</option>
+            </select>
+            <input type="submit" name="helloepta" value="JOIN">
         </form>
 
     </body>

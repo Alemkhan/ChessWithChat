@@ -1,14 +1,18 @@
-package chat.server;
+package chess.server;
+
+import chat.server.ChatServer;
+import chat.server.ClientHandler;
 
 import java.io.*;
 import java.net.Socket;
 
-public class ClientHandler extends Thread{
+public class ChessPlayerHandler extends Thread{
+
     private Socket clientSocket;
     private BufferedReader reader;
     private BufferedWriter writer;
 
-    public ClientHandler(Socket socket) throws IOException {
+    public ChessPlayerHandler(Socket socket) throws IOException {
         this.clientSocket = socket;
         reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
         writer = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
@@ -33,7 +37,7 @@ public class ClientHandler extends Thread{
         }
     }
 
-    public void send(String message){
+    private void send(String message){
         try {
             writer.write(message);
             writer.newLine();
@@ -51,11 +55,10 @@ public class ClientHandler extends Thread{
                 writer.close();
                 clientSocket.close();
             }catch(IOException e){
-                System.out.println("Error while connection close in Client Handler");
+                System.out.println("Close connection in Client Handler");
                 e.printStackTrace();
             }
         }
     }
-
 
 }

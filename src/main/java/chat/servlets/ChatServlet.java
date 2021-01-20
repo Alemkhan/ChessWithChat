@@ -1,6 +1,5 @@
 package chat.servlets;
 
-
 import chat.client.ChatClient;
 import chat.model.MessageJSON;
 import com.google.gson.Gson;
@@ -13,13 +12,12 @@ import java.io.IOException;
 
 @WebServlet(name = "ChatServlet", value = "/ChatServlet")
 public class ChatServlet extends HttpServlet {
-    public static boolean firstTime = true;
+    private static boolean isNew = true;
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println(firstTime);
-        if(firstTime){
+        if(isNew){
             new ChatClient();
-            firstTime = false;
+            isNew = false;
         }
 
         HttpSession session = request.getSession();
@@ -32,11 +30,5 @@ public class ChatServlet extends HttpServlet {
         ChatClient.servletMessage = json;
         response.getWriter().print(message);
         System.out.println(ChatClient.serverMessage);
-    }
-
-
-    public String getValueByKey(String json, String key){
-        JsonObject jobj = new Gson().fromJson(json, JsonObject.class);
-        return jobj.get(key).getAsString();
     }
 }

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Chess</title>
+    <link rel="stylesheet" href="css/chessboard-1.0.0.min.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="js/chessboard-1.0.0.min.js"></script>
+    <script src="node_modules/chess.js/chess.js"></script>
+  </head>
+
+  <body>
+    <div id="myBoard" style="width: 400px"></div>
+    <button id="clearBtn">Clear Board</button>
+    <button id="showPositionBtn">Show position in console</button>
+
+    <label>Status:</label>
+    <div id="status"></div>
+
+    <script src="start.js"></script>
+    <script src="legal.js"></script>
+    <script src="highlight.js"></script>
+    <script>
+        function clickShowPositionBtn () {
+        console.log('Current position as an Object:')
+        console.log(board.position())
+        }
+
+        $('#showPositionBtn').on('click', clickShowPositionBtn)    
+    </script>
+    <script>
+      $(document).ready(function() {
+
+        setInterval(function() {
+
+          let boardState = board.position()
+          console.log(boardState)
+
+          $.ajax({
+            url: '../ChessServlet',
+            type: "POST",
+            dataType: 'json',
+            data: JSON.stringify(boardState),
+            contentType: "application/json",
+            success: function(responseText){
+
+              $('.messageContainer').append("" +
+                      "<div class='user2'>" +
+                      "   <div class='pill2'>" +
+                      "       <h3>You</h3>" +
+                      "       <p class='user2Message'>" +
+                      responseText + "" +
+                      "       </p>" +
+                      "   </div>" +
+                      "   </div>")
+            }
+          });
+
+        }, 1000);
+
+      })
+
+    </script>
+  </body>
+</html>
