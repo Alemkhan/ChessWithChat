@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="chesswithchat:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>chesswithchat</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="chesswithchat-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="chesswithchat:war exploded" />
+    </root>
+  </artifact>
+</component>
