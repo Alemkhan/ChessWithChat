@@ -2,6 +2,7 @@ package chess.servlets;
 
 import chat.client.ChatClient;
 import chat.model.MessageJSON;
+import chess.client.ChessClient;
 import chess.model.Board;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -42,17 +43,18 @@ public class ChessServlet extends HttpServlet {
         Board messageJSON = new Board(username, boardState);
         String jsonObject  = gson.toJson(messageJSON);
         System.out.println(jsonObject);
-        ChatClient.servletMessage = jsonObject;
+        ChessClient.servletMessage = jsonObject;
 
         response.setContentType("application/json");
         String jsonResponse = ChatClient.serverMessage;
 
         if(jsonResponse!=null&&!username.equals(getValueByKey(jsonResponse, "username"))){
             response.getWriter().print(json);
-            ChatClient.serverMessage = null;
+            ChessClient.serverMessage = null;
         }else{
             response.getWriter().print("Error");
         }
+
     }
 
     public String getValueByKey(String json, String key){
