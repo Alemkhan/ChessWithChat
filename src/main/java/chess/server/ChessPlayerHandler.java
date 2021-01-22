@@ -1,19 +1,22 @@
 package chess.server;
 
-import chat.server.ChatServer;
-import chat.server.ClientHandler;
+import chess.model.Board;
 
 import java.io.*;
 import java.net.Socket;
 
 public class ChessPlayerHandler extends Thread{
 
+    private String color;
     private Socket clientSocket;
     private BufferedReader reader;
     private BufferedWriter writer;
 
-    public ChessPlayerHandler(Socket socket) throws IOException {
+
+    public ChessPlayerHandler(Socket socket, String color) throws IOException{
+        System.out.println("HELLO");
         this.clientSocket = socket;
+        this.color = color;
         reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
         writer = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
         start();
@@ -25,13 +28,14 @@ public class ChessPlayerHandler extends Thread{
         while(true){
             try{
                 message = reader.readLine();
-                System.out.println(message);
-                for (ClientHandler client: ChatServer.clients) {
-                    client.send(message);
+                String json = Board.newBoardJson(message, color);
+                System.out.println("HHELLO" + json);
+                for (ChessPlayerHandler client: ChessServer.players) {
+                    client.send(json);
                 }
 
             }catch(IOException e){
-                System.out.println("Client Handler Thread got an exception with sending message");
+                System.out.println("Client Player Thread got an exception with sending message");
                 close();
             }
         }

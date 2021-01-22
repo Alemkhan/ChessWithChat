@@ -7,14 +7,21 @@ import java.util.LinkedList;
 
 public class ChessServer {
 
-    private static final int PORT = 4000;
-    public static LinkedList<ChessPlayerHandler> clients = new LinkedList<>();
+    private static final int PORT = 5000;
+    public static LinkedList<ChessPlayerHandler> players = new LinkedList<>();
 
     public static void main(String[] args) {
         try(ServerSocket serverSocket = new ServerSocket(PORT)) {
             while(true){
+
                 Socket socket = serverSocket.accept();
-                clients.add(new ChessPlayerHandler(socket));
+
+                if(players.size()==0) {
+                    players.add(new ChessPlayerHandler(socket, "w"));
+                }else{
+                    players.add(new ChessPlayerHandler(socket, "b"));
+                }
+
             }
         }catch(IOException e){
             e.printStackTrace();

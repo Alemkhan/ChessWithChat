@@ -9,7 +9,7 @@ public class ChessClient {
 
     public static volatile String servletMessage;
     public static volatile String serverMessage;
-    private static final int PORT = 4000;
+    private static final int PORT = 5000;
     private Socket clientSocket;
     private BufferedReader reader;
     private BufferedWriter writer;
