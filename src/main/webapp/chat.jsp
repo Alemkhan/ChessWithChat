@@ -59,6 +59,14 @@
         }
 
 
+        .pill1{
+            min-width: 20%;
+            padding: 5px 10px;
+            float:left;
+            background-color: #fff;
+            color: #101010;
+        }
+
         .pill2{
             min-width: 20%;
             padding: 5px 10px;
