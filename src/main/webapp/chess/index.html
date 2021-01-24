@@ -3,13 +3,11 @@
   <head>
     <title>Chess</title>
     <link rel="stylesheet" href="css/chessboard-1.0.0.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script src="js/chessboard-1.0.0.min.js"></script>
     <script src="node_modules/chess.js/chess.js"></script>
-
-
-
-
     <script>
 
       $(document).ready(function() {
@@ -68,27 +66,40 @@
       })
 
     </script>
+    <style>
+      body {
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://wallpaperaccess.com/full/1231808.jpg');
+        background-size: cover;
+        color: #fff;
+        width: 100%;
+        height: 100%;
+      }
+      .chess {
+        margin-left: 400px;
+      }
+    </style>
   </head>
 
   <body>
-    <div id="myBoard" style="width: 400px"></div>
-    <button id="clearBtn">Clear Board</button>
-    <button id="showPositionBtn">Show position in console</button>
+    <div class="chess">
+      <div id="myBoard" style="width: 500px;"></div>
+      <button id="clearBtn" class="m-2 btn btn-success">Clear Board</button>
+      <button id="showPositionBtn" class="m-2 btn btn-info text-white">Show position in console</button>
+      <label>Status:</label>
+      <div id="status"></div>
+    </div>
 
-    <label>Status:</label>
-    <div id="status"></div>
 
-    <script src="start.js"></script>
-    <script src="legal.js"></script>
-    <script src="highlight.js"></script>
-    <script>
-        function clickShowPositionBtn () {
-        console.log('Current position as an Object:')
-        console.log(board.position())
-        }
+  <script src="start.js"></script>
+      <script src="legal.js"></script>
+      <script src="highlight.js"></script>
+      <script>
+          function clickShowPositionBtn () {
+          console.log('Current position as an Object:')
+          console.log(board.position())
+          }
 
-        $('#showPositionBtn').on('click', clickShowPositionBtn)    
-    </script>
-
+          $('#showPositionBtn').on('click', clickShowPositionBtn)
+      </script>
   </body>
 </html>
