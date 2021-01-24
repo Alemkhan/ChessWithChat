@@ -16,7 +16,7 @@
                 height: 100%;
             }
             #cover {
-                background: #222 url('https://unsplash.it/1920/1080/?random') center center no-repeat;
+                background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images8.alphacoders.com/102/1026626.png');
                 background-size: cover;
                 height: 100%;
                 text-align: center;
@@ -38,7 +38,7 @@
         </style>
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark text-black">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">
                     Chat and Chess
@@ -62,9 +62,9 @@
             <div class="container mt-5 col-6">
                <div class="row text-white">
                    <form class="justify-content-center" method="post" action="LoginServlet">
-                       <legend>Login to Chat or Play</legend>
+                       <legend >Login to Chat or Play</legend>
                        <div class="mb-3">
-                           <label for="name">Username:</label>
+                           <label for="name" >Username:</label>
                            <input id="name" class="form-control" type="text" name="username" required>
                        </div>
                        <div class="mb-3">
