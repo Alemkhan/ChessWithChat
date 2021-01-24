@@ -68,7 +68,7 @@
     </script>
     <style>
       body {
-        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://wallpaperaccess.com/full/1231808.jpg');
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://cutewallpaper.org/21/mai-sakurajima-wallpapers/Mai-Sakurajima-Wallpaper-SeishunButaYarou.jpg');
         background-size: cover;
         color: #fff;
         width: 100%;
@@ -81,25 +81,33 @@
   </head>
 
   <body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark text-black">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        Chat and Chess
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
     <div class="chess">
       <div id="myBoard" style="width: 500px;"></div>
-      <button id="clearBtn" class="m-2 btn btn-success">Clear Board</button>
-      <button id="showPositionBtn" class="m-2 btn btn-info text-white">Show position in console</button>
-      <label>Status:</label>
-      <div id="status"></div>
     </div>
 
 
   <script src="start.js"></script>
       <script src="legal.js"></script>
       <script src="highlight.js"></script>
-      <script>
-          function clickShowPositionBtn () {
-          console.log('Current position as an Object:')
-          console.log(board.position())
-          }
-
-          $('#showPositionBtn').on('click', clickShowPositionBtn)
-      </script>
   </body>
 </html>
