@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Chess</title>
+    <link rel="stylesheet" href="css/chessboard-1.0.0.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="js/chessboard-1.0.0.min.js"></script>
+    <script src="node_modules/chess.js/chess.js"></script>
+    <script>
+
+      $(document).ready(function() {
+        let side;
+        let isFlipped = false;
+
+        $.ajax({
+          url: '../ChessServlet',
+          type: "POST",
+          contentType: "application/json",
+        });
+
+
+        setInterval(function() {
+          $.post('../BoardPrinter', function (response) {
+            if (response.positionAndfigure!==null) {
+              side = response.color;
+              if(isFlipped===false&&side==='b'){
+                board.flip();
+                isFlipped = true;
+              }
+
+              if(side==='w'){
+                if(game.turn()==='w') {
+                  game.setTurn('b')
+                }
+              }
+
+              if(side==='b'){
+                if(game.turn()==='b') {
+                  game.setTurn('w')
+                }
+              }
+              board.position(response.positionAndfigure);
+            }
+          });
+
+        }, 1000);
+
+        $('.piece-417db').mouseup(function() {
+          setTimeout(function(){
+            let boardState = board.position()
+
+            $.ajax({
+              url: '../ChessServlet',
+              type: "POST",
+              dataType: 'json',
+              data: JSON.stringify(boardState),
+              contentType: "application/json",
+            });
+          },1000)
+
+
+        });
+
+      })
+
+    </script>
+    <style>
+      body {
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://cutewallpaper.org/21/mai-sakurajima-wallpapers/Mai-Sakurajima-Wallpaper-SeishunButaYarou.jpg');
+        background-size: cover;
+        color: #fff;
+        width: 100%;
+        height: 100%;
+      }
+      .chess {
+        margin-left: 400px;
+      }
+    </style>
+  </head>
+
+  <body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark text-black">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        Chat and Chess
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+    <div class="chess">
+      <div id="myBoard" style="width: 500px;"></div>
+    </div>
+
+
+  <script src="start.js"></script>
+      <script src="legal.js"></script>
+      <script src="highlight.js"></script>
+  </body>
+</html>
